@@ -1,0 +1,65 @@
+ html {
+ 	box-sizing: border-box;
+ }
+
+ *, *:before,*:after {
+ 	box-sizing: inherit;
+ }
+
+ .container  {
+ 	margin: 0 auto;
+ 	height: 100%;
+ 	width: 100%;
+ 	max-width: 1200px;
+ 	
+ }
+.row {
+	width: 100%;
+	
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.column {
+	float: left;
+	padding: 0%;
+	margin: 0px;
+	box-shadow: inset 0 0 0 1px black;
+ }
+
+
+.column.one-half {
+	width: 50%;
+	
+}
+
+.column.one-third {
+	width: 33.33%;
+	
+
+
+}
+
+.column.one-fourth {
+	width: 25%;
+	
+
+
+}
+
+.column.one-sixth {
+	width: 16.66%;
+	
+}
+
+
+.column.one-eighth {
+	width: 12.5%;
+	
+}
+
+

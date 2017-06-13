@@ -1,0 +1,12 @@
+h1 {
+	text-align: center;
+}
+
+.fancy-header {
+	color: blue;
+	text-decoration: underline
+}
+
+body {
+	background-color: #ffff00;
+}

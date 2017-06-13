@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Yummy Pizza Order Form</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        div {
+            margin: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Welcome to Yummy Pizza</h1>
+        <p>Use the options below to make your yummiest pizza</p>
+        <p>
+            <a href="/login.html">Please enter your order info.</a>
+        </p>
+
+        <form method="POST" action="https://requestb.in/1j1tq091">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required autofocus>
+            </div>
+            <div>
+                <label for="email">eMail</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="credit card">Credit Card Number.</label>
+                <input type="credit card" name="credit card" id="credit card" required>
+            </div>
+            
+            <div>
+                <input name="Coupon" type="checkbox" >Do you have a coupon for this order?
+
+            </div>
+
+            <button type="submit"></button>
+        </form>
+    </main>
+</body>
+</html>
