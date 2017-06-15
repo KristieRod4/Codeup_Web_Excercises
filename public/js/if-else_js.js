@@ -12,6 +12,8 @@ var favorite = 'violet'; // TODO: change this to your favorite color from the li
 // TODO: When a color is encountered log a message that tells the color, and an object of that color.
 //       Example: Blue is the color of the sky.
 
+// use to check code specifics are workig
+console.log("The random color chosen is" + color);
 
 if (color === 'red') {
 	console.log("Roses are red.");
@@ -28,6 +30,8 @@ if (color === 'red') {
 }
 
 (color === favorite)console.log(color + "my favorite color.") : console.log(color + "is NOT my favorite color");
+(color === favorite) ? "The random color matches!" : "Random and favorite colors are different";
+console.log()
 // TODO: Have a final else that will catch indigo and violet.
 // TODO: In the else, log: I do not know anything by that color.
 
