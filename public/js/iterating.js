@@ -27,10 +27,14 @@ console.log("There are " + names.length + " names in the array");
 // // Finally, save your work, commit the changes to your git repository, 
 // and push to GitHub.
 
-for (var i = 0; i < names.length; i++) {
-	console.log(names[i]);
-}
+// for (var i = 0; i < names.length; i++) {
+// 	console.log(names[i]);
+// }
 
+names.forEach(function (element, index, array) {
+
+    console.log('The names in the index ' + index + ' are: ' + element);
+});
 
 })();
 
@@ -50,5 +54,5 @@ for (var i = 0; i < names.length; i++) {
 //  ask the user which conversion to make (Fahrenheit to Celsius or vice versa) 
 //  return to the user a list of converted temperatures.
 
-Extra bonus: add Kelvin.
+// Extra bonus: add Kelvin.
 
