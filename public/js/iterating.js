@@ -27,9 +27,9 @@ console.log("There are " + names.length + " names in the array");
 // // Finally, save your work, commit the changes to your git repository, 
 // and push to GitHub.
 
-// for (var i = 0; i < names.length; i++) {
-// 	console.log(names[i]);
-// }
+for (var i = 0; i < names.length; ++i) {
+	console.log(names[i]);
+}
 
 names.forEach(function (element, index, array) {
 
