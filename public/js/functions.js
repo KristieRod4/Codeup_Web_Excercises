@@ -9,11 +9,11 @@
  *  > sayHello("codeup") // returns "Hello, codeup!"
  */
 
- // function sayHello(name){
- // 	return "Hello, " + name + "!";
+ function sayHello(name){
+ 	return "Hello, " + name + "!";
  
- // }
- // 	console.log(sayHello("codeup"));
+ }
+ 	console.log(sayHello("codeup"));
 
  
 
