@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DOM: Query and Modify</title>
+</head>
+<body>
+
+<h1 id="main-header">Hello World!</h1>
+<ul>
+    <li data-dbid="1">Item 1</li>
+    <li data-dbid="2">Item 2</li>
+    <li data-dbid="3">Item 3</li>
+    <li data-dbid="4">Item 4</li>
+    <li data-dbid="5">Item 5</li>
+</ul>
+<h2 id="sub-header">Hello Again.</h2>
+<p class="sub-paragraph">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat. Duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+    culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+    <button id="btn1">Change JavaScript is Cool!</button>
+    <button id="btn2">Click Me to Update Sub Header!</button>
+    <button id="btn3">Click Me to Make List Grey!</button>
+    <button id="btn4">Click Me to Complete Exercise!</button>
+<script>
+    (function() {
+        "use strict";
+        // TODO: Uncomment next line and get the main header element by id
+        
+        var headerButton = document.getElementById('btn1');
+        function changeHeader(){
+            var mainHeader = document.getElementById("main-header");
+                console.log(mainHeader)
+                mainHeader.innerHTML = "Javascript is Cool!"
+
+        }
+
+         headerButton.addEventListener("click", changeHeader);
+
+        
+
+
+        // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+        
+//         var listener = function (event) {
+//             ;
+//         }
+//         .addEventListener('click', listener, true);
+//         document.getElementById("mainHeader").innerHTML = "JavaScript is Cool!";
+        
+// });
+        // register the listener to handle clicks on btn1
+
+        
+        
+
+        // TODO: Uncomment the next line and get the sub header element by id
+        var colorButton = document.getElementById("btn2")
+            function setToBlue() {
+                var subHeader = document.getElementById("sub-header");
+                 console.log(subHeader);
+                 subHeader.style.color = "blue";
+            }
+
+        colorButton.addEventListener("click", setToBlue);
+
+        // TODO: Set the text color of subHeader to blue
+        
+        // document.getElementById("sub-header").style.color = "blue";
+
+        // TODO: Uncomment the next line and get all list items
+        var listItems = document.getElementsByTagName('li');
+        console.log(listItems);
+
+
+        // TODO: Set text color on every other list item to grey
+        var greyButton = document.getElementById("btn3");
+        function setToGrey(){
+        var liGrey = document.getElementsByTagName('li');
+            liGrey[0].style.color = "grey"
+            liGrey[2].style.color = "grey"
+            liGrey[4].style.color = "grey"
+
+        }
+
+        greyButton.addEventListener("click", setToGrey);
+        //     for (var i =0; i < listItems.length; i++) {
+        //         if (i % 2 == 0){ 
+        //             listItems[i].style.color = "grey";
+        //      }
+                
+        //      }
+
+        //      // paragraphs [i].style["background-color"] = "grey";
+        //     //     console.log(paragraphs[i].innerText)
+        //     // }
+
+        // // TODO: Set text color of li with dbid = 1 to blue
+        //     if(listItems[i].getAttribute("data-dbid") == 1) {
+            // listItems[1].style.color = "blue";
+        // }
+        // // TODO: Uncomment the next line and get all elements with class name sub-paragraph
+        var subParagraphs = document.getElementsByClassName('sub-paragraph');
+        console.log(subParagraphs);
+
+        // // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+        var subButton = document.getElementById("btn4");
+            function changeSubPar(){ 
+                var subParagraphs = document.getElementsByClassName('sub-paragraph');
+                subParagraphs[0].innerHTML = "Mission Accomplished!";
+                
+            }
+            subButton.addEventListener("click", changeSubPar);
+    // Add 4 buttons to the page. Attach click event listeners to each of the buttons and have the handlers perform the modifications that were automatically taking place.
+
+     // For example, the first button should set inner html of mainHeader to "JavaScript is Cool".
+    // View the results in your browser to test for the expected output.
+    // Finally, save your work, commit the changes to your git repository, and push to GitHub.
+
+    
+    // 
+
+    
+
+       
+    //     var listener = function (event) {
+    //         alert('You clicked the button!');
+    //     }
+
+    //     // register the listener to handle clicks on btn1
+    //     document.getElementById('btn1').addEventListener('click', listener, false);
+
+
+    })();
+</script>
+</body>
+</html>
