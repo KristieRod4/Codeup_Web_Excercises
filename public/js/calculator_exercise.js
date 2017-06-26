@@ -1,3 +1,8 @@
+(function(){
+	"use strict";
+
+//=======================Variable Inputs==============================//
+
 var leftInput = document.getElementById("leftInput");
 var operatorInput = document.getElementById("operatorInput");
 var rightInput = document.getElementById("rightInput");
@@ -5,7 +10,7 @@ var sum = document.getElementById("sum");
 var clearAll = document.getElementById("operatorall_clear");
 var answer;
 
-//_____________Adding Numbers and Operators______________//
+//=======================Adding Numbers and Operators=================//
     
 
  var numberz = document.getElementsByClassName("number");
@@ -17,7 +22,7 @@ for (var i=0; i <operatorz.length; i++){
 	operatorz[i].addEventListener("click", addNumberToDisplay);
 }
 
-//___________________________________________________//
+//=======================Display Function============================//
 
 function addNumberToDisplay(){
 	if (this.className.includes("operator")){
@@ -34,7 +39,7 @@ function addNumberToDisplay(){
 }
 
 
-//___________________________________________________//
+//=======================Math Equation===============================//
 clearAll.addEventListener("click", function(){
 	leftInput.setAttribute("value", "");
 	operatorInput.setAttribute("value", "");
@@ -63,9 +68,6 @@ function calculateResults(){
 
 sum.addEventListener("click", calculateResults);
 
-// function executeMathOperation(){
-// 	operator.value = this.value;
-// }
 
 function clearCalc (){
 	leftInput.value = answer;
@@ -73,6 +75,7 @@ function clearCalc (){
 	rightInput.value = "";
 }
 
+});
 // function emptyTextBox(){
 // operator.value = "";
 // rightInput.value = "";
@@ -85,7 +88,7 @@ function clearCalc (){
 // });
 
 
-
+//==================Initial Number Assignments========================//
 
 // var one = document.getElementById("btnone")
 // one.addEventListener("click", function(){
@@ -153,7 +156,7 @@ function clearCalc (){
 // 	leftInput.value = "."
 
 // })
-//____________________Adding Math Symbols to Operator_____________//
+//======================Initial Math Symbols to Operator====================//
 
 
 // var add = document.getElementById("operatoradd")
@@ -177,7 +180,7 @@ function clearCalc (){
 // })
 
 
-//_________________Adding Numbers to RightInput_____________________//
+//===================Initial Adding Numbers to RightInput====================//
 
 // var one = document.getElementById("btnone")
 // one.addEventListener("click", function(){
@@ -249,7 +252,7 @@ function clearCalc (){
 
 
 
-//______________________Operator Functions_______________________//
+//=======================Initial Operator Functions========================//
 
 // var operator;
 // 	function setValues()
