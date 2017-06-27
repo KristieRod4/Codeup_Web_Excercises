@@ -20,19 +20,6 @@ var mapOptions = {
 
 
 
-//=================== Add the marker to our existing map-Initial Exercise==============//
-// 	var marker = new google.maps.Marker({
-//     	position: favRestaurant,
-//     	map: map
-// });
-
-// 	// Create a new infoWindow object with content
-// 	var infowindow = new google.maps.InfoWindow({
-//     content: "<h1>Las Cazuelas..The Best TexMex in Town!</h1>"
-// });
-
-// // Open the window using our map and marker
-// 	infowindow.open(map, marker);
 
 //================================Adding JSON Array===========================//
 
@@ -174,6 +161,19 @@ var mapOptions = {
 // 		console.log("This code comes after the geocoding request!");
 
 // });
+//=================== Add the marker to our existing map-Initial Exercise==============//
+// 	var marker = new google.maps.Marker({
+//     	position: favRestaurant,
+//     	map: map
+// });
+
+// 	// Create a new infoWindow object with content
+// 	var infowindow = new google.maps.InfoWindow({
+//     content: "<h1>Las Cazuelas..The Best TexMex in Town!</h1>"
+// });
+
+// // Open the window using our map and marker
+// 	infowindow.open(map, marker);
 	
 
 
