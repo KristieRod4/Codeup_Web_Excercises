@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+
+</head>
+<body>
+    <h1>Konami Code</h1>
+    <!-- <button class="arrows" name="upArrow" id="btn38" value="^">^</button>
+   	<button class="arrows" name="downArrow" id="btn40" value="^">^</button>
+   	<button class="arrows" name="lessThanArrow" id="btn37" value="^">^</button>
+   	<button class="arrows" name="greaterThanArrow" id="btn39" value="^">^</button>
+   	<button class="text"   name="b" id="btn66" value="b">b</button>
+   	<button class="text"   name="a" id="btn65" value="a">a</button>
+   	<button class="text"   name="enter" id="btn13" value="enter">enter</button> -->
+    <!-- <input type="text" id="demo"> -->
+
+    <script src="/js/jquery.js"></script>
+    <script>
+        "use strict";
+    	
+    	var codeInput =[38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13];
+    	var userInput = [];	
+
+        $(document).keydown(function(event){
+        	userInput.push(event.keyCode);
+
+        	console.log(userInput);
+        	
+        	if(userInput.toString()== codeInput.toString()){
+        		alert("You have added 30 lives!");
+
+        	}
+
+    		
+   	 	});  
+
+// TODO:Allow the user to enter the Konami Code: "↑ ↑ ↓ ↓ ← → ← → b a enter" (the return key)
+	
+// ToDo:Find the matching sequence using the code above for each key in the Konami Code.
+// Don't worry about capital a or b just check for lowercase.
+
+
+    
+    	
+
+// ToDo:After the correct Konami Code sequence is inputted then the enter key have the script alert the user: 	"You have added 30 lives! Other ideas:
+
+// TODO:Change the background screen.
+
+// function myFunction() {
+//     document.getElementById("demo").style.backgroundColor = "red";
+// }
+// document.getElementById("demo").addEventListener("keydown", myFunction);
+
+// TODO:Play a sound.
+// Be creative!
+// Happy Playing.
+
+
+
+
+
+
+
+       
+    </script>
+</body>
+</html>
