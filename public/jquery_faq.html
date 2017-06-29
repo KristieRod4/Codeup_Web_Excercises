@@ -7,46 +7,108 @@
 </head>
 <body>
 
-<dl>
-  <dt>Where is Yellowstone National Park</dt>
-  	<dd class="invisible">Yellowstone is a nearly 3,500-sq. mile wilderness atop a volcanic hot spot.</dd>
-  <dt>Where is Yoseimite National Park</dt>
-  	<dd class="invisible">Yosemite is in California's Sierra Nevada mountains.</dd>
-  <dt>Where is Grand Cany National Park</dt>
-  	<dd class="invisible">Grand Cany in Arizona is a natural formation distinguished by layers of bands of red rock.</dd>
-  <dt>Where is Acadia National Park</dt>
-  	<dd class="invisible">Acadia is a 47,000 acre Atlantic coast recreation area in Maine's Mount Desert Island.</dd>
-  <dt>Where is Great Smoky Mountains National Park</dt>
-  	<dd class="invisible">Great Smoky straddles the border between North Carolina and Tennesse.</dd>
-  <dt>Where is Grand Teton National Park</dt>
-  	<dd class="invisible">Grand Teton is inthe northwest of the U.S. state of Wyoming.</dd>
-  <dt>Where is Glacier National Park</dt>
-  	<dd class="invisible">Glacier is 1,583 sq. mi. of wilderness area in Montana's Rocky Mountains.</dd>
-  <dt>Where is Zion National Park</dt>
-  	<dd class="invisible">Zion is a southest Utah nature preserve.</dd>
-  <dt>Where is Olympic National Park</dt>
-  	<dd class="invisible">Olympic is on Washington State's Olympic Penninsula inthe Pacific Northwest.</dd>
-  <dt>Where is Sequoia National Park</dt>
-  	<dd class="invisible">Sequoia is in California's southern Sierra Nevada mountains.</dd>
-</dl>
+	
+		<div>
+			
+			<span id="clickX">x</span>
+			<h1 id="signUp">Would You Like to Sign Up for Our Newsletter?</h1>
 
-<button>Toggle Answers</button>
+		</div>
+
+	<h2>FAQ's for Natinal Parks</h2>
+		<dl>
+  			<dt>Where is Yellowstone National Park</dt>
+  				<dd class="invisible">Yellowstone is a nearly 3,500-sq. mile wilderness atop a volcanic hot spot.</dd>
+  			<dt>Where is Yoseimite National Park</dt>
+  				<dd class="invisible">Yosemite is in California's Sierra Nevada mountains.</dd>
+  			<dt>Where is Grand Canyon National Park</dt>
+  				<dd class="invisible">Grand Cany in Arizona is a natural formation distinguished by layers of bands of 			red rock.</dd>
+  			<dt>Where is Acadia National Park</dt>
+  				<dd class="invisible">Acadia is a 47,000 acre Atlantic coast recreation area in Maine's Mount Desert Island.</dd>
+  			<dt>Where is Great Smoky Mountains National Park</dt>
+  				<dd class="invisible">Great Smoky straddles the border between North Carolina and Tennesse.</dd>
+  			<dt>Where is Grand Teton National Park</dt>
+  				<dd class="invisible">Grand Teton is inthe northwest of the U.S. state of Wyoming.</dd>
+  			<dt>Where is Glacier National Park</dt>
+  				<dd class="invisible">Glacier is 1,583 sq. mi. of wilderness area in Montana's Rocky Mountains.</dd>
+  			<dt>Where is Zion National Park</dt>
+  				<dd class="invisible">Zion is a southest Utah nature preserve.</dd>
+  			<dt>Where is Olympic National Park</dt>
+  				<dd class="invisible">Olympic is on Washington State's Olympic Penninsula inthe Pacific Northwest.</dd>
+  			<dt>Where is Sequoia National Park</dt>
+  				<dd class="invisible">Sequoia is in California's southern Sierra Nevada mountains.</dd>
+	</dl>
+
+		<button class="btn1">Toggle Answers</button>
+
+<h3 id="national-parks-heading">Keni Fjords National Park</h3>
+	<ul id="national-parks">
+    	<li>Keni is located on the remote Kenai Peninsula in southern Alaska.</li>
+    	<li>Its rugged landscapes span fjords, mountains and glaciers, including the huge Exit Glacier.</li>
+    	<li>Black bears are often seen along the high-altitude Harding Icefield Trail, which leads through forests and meadows to the vast Harding Icefield.</li>
+    	<li>Sea otters, sea lions and migrating whales inhabit Resurrection Bay, off the park's shoreline.</li>
+    
+	</ul>
+<h3 id="national-parks-heading">Everglades National Park</h3>
+	<ul id="national-parks">
+    	<li>Everglades National Park is a 1.5-million-acre wetlands preserve on the southern tip of the U.S. state of Florida.</li>
+    	<li>It was established on December 6, 1947</li>
+    	<li>Among the Everglades' abundant wildlife are the endangered leatherback turtle, Florida panther and West Indian manatee.</li>
+    	<li>It sees 930,907 visitors per year.</li>
+    
+	</ul>
+<h3 id="national-parks-heading">Crater Lake National Park</h3>
+	<ul id="national-parks">
+    	<li>Crater Lake National Park is in the Cascade Mountains of southern Oregon.</li>
+    	<li>It’s known for its namesake Crater Lake, formed by the now-collapsed volcano, Mount Mazama.</li>
+    	<li>Wizard Island is a cinder cone near the western edge of the lake. The Rim Drive, a road surrounding the lake, offers views of the park’s volcanic formations.</li>
+    	<li>The park’s numerous trails include Sun Notch, with views of the Phantom Ship, a small island.</li>
+	</ul>
+
+<button class="btn2">Highlight Last Fact</button>
+
 
 <script src="/js/jquery.js"></script>
     <script>
         "use strict";
 $(document).ready(function(){
 
-        $('button').click(function(){
+
+	$('#clickX').click(function(){
+		$("h1").hide(function(){
+
+		});
+	});
+
+        $('.btn1').click(function(){
         	$('dd').toggleClass('invisible');
         });
 
        $('dt').click(function(){
        	$(this).css('background', 'yellow');
        });
+
+       $('.btn2').click(function(){
+       	$('ul').each(function(index, element){
+       		$(this).children().last().css('background-color', 'yellow');
+       	});
+
+      });
+
+
+       	$('h3').click(function(){
+       		$(this).next().children().css('font-weight', 'bold');
+       		
+       		});
+
+       	$('li').click(function(){
+       	   $(this).parent().children().first().css('color', 'blue');
+
+       	   });
+     
+ 	      
          
  });
-
     </script>
 
 
