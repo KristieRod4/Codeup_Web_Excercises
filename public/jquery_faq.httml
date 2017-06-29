@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query FAQ Exercise</title>
+    <link rel="stylesheet" href="/css/jquery_faq_css.css">
+    <!-- <script src="/js/functions.js"></script> -->
+</head>
+<body>
+
+<dl>
+  <dt>Where is Yellowstone National Park</dt>
+  	<dd class="invisible">Yellowstone is a nearly 3,500-sq. mile wilderness atop a volcanic hot spot.</dd>
+  <dt>Where is Yoseimite National Park</dt>
+  	<dd class="invisible">Yosemite is in California's Sierra Nevada mountains.</dd>
+  <dt>Where is Grand Cany National Park</dt>
+  	<dd class="invisible">Grand Cany in Arizona is a natural formation distinguished by layers of bands of red rock.</dd>
+  <dt>Where is Acadia National Park</dt>
+  	<dd class="invisible">Acadia is a 47,000 acre Atlantic coast recreation area in Maine's Mount Desert Island.</dd>
+  <dt>Where is Great Smoky Mountains National Park</dt>
+  	<dd class="invisible">Great Smoky straddles the border between North Carolina and Tennesse.</dd>
+  <dt>Where is Grand Teton National Park</dt>
+  	<dd class="invisible">Grand Teton is inthe northwest of the U.S. state of Wyoming.</dd>
+  <dt>Where is Glacier National Park</dt>
+  	<dd class="invisible">Glacier is 1,583 sq. mi. of wilderness area in Montana's Rocky Mountains.</dd>
+  <dt>Where is Zion National Park</dt>
+  	<dd class="invisible">Zion is a southest Utah nature preserve.</dd>
+  <dt>Where is Olympic National Park</dt>
+  	<dd class="invisible">Olympic is on Washington State's Olympic Penninsula inthe Pacific Northwest.</dd>
+  <dt>Where is Sequoia National Park</dt>
+  	<dd class="invisible">Sequoia is in California's southern Sierra Nevada mountains.</dd>
+</dl>
+
+<button>Toggle Answers</button>
+
+<script src="/js/jquery.js"></script>
+    <script>
+        "use strict";
+
+        $('button').click(function(){
+        	$('dd').toggleClass('invisible');
+        });
+
+       $('dt').click(function(){
+       	$(this).css('background', 'yellow');
+       });
+         
+ });
+
+    </script>
+
+
+
+
+	</body>
+</html>
+
+
+
+
+
+
+
