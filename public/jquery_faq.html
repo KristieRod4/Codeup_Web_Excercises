@@ -10,12 +10,14 @@
 	
 		<div>
 			
-			<span id="clickX">x</span>
+			<span id="clickX"<x<</span>
 			<h1 id="signUp">Would You Like to Sign Up for Our Newsletter?</h1>
 
 		</div>
 
-	<h2>FAQ's for Natinal Parks</h2>
+    <h2 id="register">Please Subscribe Today!</h2>
+
+	<h2 id="faqNational">FAQ's for Natinal Parks</h2>
 		<dl>
   			<dt>Where is Yellowstone National Park</dt>
   				<dd class="invisible">Yellowstone is a nearly 3,500-sq. mile wilderness atop a volcanic hot spot.</dd>
@@ -73,12 +75,34 @@
         "use strict";
 $(document).ready(function(){
 
+//my solo solution
+	// $('#clickX').click(function(){
+	// 	$("h1").hide(function(){
 
-	$('#clickX').click(function(){
-		$("h1").hide(function(){
+	// 	});
+	// });
 
-		});
-	});
+$('span').click(function(){
+  $(this).parent().hide();
+});
+
+
+$('h3').click(function(){
+  $(this).next().slideToggle();
+});
+
+$('#register').hide().delay(8000).fadeIn();
+
+//bonus
+
+$('#alert').hide().delay(2000).fadeIn();
+
+setTimeOut(function(){
+$('myModal').('modal'('show'))
+}, 2000);
+
+
+
 
         $('.btn1').click(function(){
         	$('dd').toggleClass('invisible');
