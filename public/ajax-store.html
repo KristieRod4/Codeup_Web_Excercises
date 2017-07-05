@@ -37,6 +37,35 @@
             console.log(status);
             console.log(error);
         });
+        //===================instructor solution==========================//
+        //====================step one=============================//
+        var url = "/data/inventory.json";
+
+
+
+        var request = $.get(url);
+
+        request.done(function(data, status, jqXHR) {
+            console.log(data);
+            console.log(status);
+            console.log(data.name);
+
+            var htmlString ="<tr>";
+            htmlString += "<td>" + data.name + "</td>";
+            htmlString += "<td>1</td>";
+
+            $("#insertProducts")
+        });
+        request.fail(function(jqXHR,status, error) {
+            console.log(status);
+            console.log(error);
+        });
+
+        //====================step two===========================//
+        // couldnt keep up with typing...see notes in git hub=====//
+
+
+
 
     // TODO: Take the data from inventory.json and append it to the products table
     //    HINT: Your data should come back as a JSON object; use console.log() to inspect
@@ -51,7 +80,7 @@
                     "<tr>" + 
                     "<td>" + tool.title + "</td>" +
                     "<td>" + tool.quantity + "</td>" +
-                    "<td>" + tool.price + "</td>" +
+                    "<td>$" + tool.price + "</td>" +
                     "<td>" + tool.categories.join(", ") + "</td>" +
                     "</tr>"
                 );
