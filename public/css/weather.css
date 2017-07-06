@@ -1,0 +1,25 @@
+
+
+body {
+	background-color: Lightblue
+}
+
+.days{
+	background-color: #fff;
+	display: flex;
+	height: 150px;
+	width: 200px;
+	border: 2px solid black;
+}
+
+#box1{
+	float: left;
+}
+
+#box2{
+	float: left;
+}
+
+.center{
+	font: center;
+}
