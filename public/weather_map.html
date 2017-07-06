@@ -45,51 +45,59 @@
         cnt: "3",
         units: "Imperial", 
             }) .done(function(data){
-            forecastDay1(data);
-            forecastDay2(data);
-            forecastDay3(data);
+            addForecasts(data);
         }).fail(function(jqXhr, status, error){
             alert("There was an error! Check the console for details");
             console.log("Response status: " + status);
             console.log("Error object: " + error);
      });
 
-        function forecastDay1(weather){
-            var day1Forecast = "";
+        // function forecastDay1(weather){
+        //     var day1Forecast = "";
 
-            day1Forecast += weather.list[0].temp.max + "/" + weather.list[0].temp.min + "<br>";
-            day1Forecast += "Rain: " + weather.list[0].weather[0].description + "<br>";
-            day1Forecast += "Humidity: " + weather.list[0].humidity + "<br>";
-            day1Forecast += "Wind: " + weather.list[0].speed + "<br>";
-            day1Forecast += "Pressure: " + weather.list[0].pressure + "<br>";
-            $("#box1").append(day1Forecast);
+        //     day1Forecast += weather.list[0].temp.max + "/" + weather.list[0].temp.min + "<br>";
+        //     day1Forecast += "Rain: " + weather.list[0].weather[0].description + "<br>";
+        //     day1Forecast += "Humidity: " + weather.list[0].humidity + "<br>";
+        //     day1Forecast += "Wind: " + weather.list[0].speed + "<br>";
+        //     day1Forecast += "Pressure: " + weather.list[0].pressure + "<br>";
+        //     $("#box1").append(day1Forecast);
 
+        // };
+
+
+        // function forecastDay2(weather){
+        //     var day2Forecast = "";
+        //         day2Forecast += weather.list[1].temp.max + "/" + weather.list[1].temp.min + "<br>";
+        //         day2Forecast += "Rain: " + weather.list[1].weather[0].description + "<br>";
+        //         day2Forecast += "Humidity: " + weather.list[1].humidity + "<br>";
+        //         day2Forecast += "Wind: " + weather.list[1].speed + "<br>";
+        //         day2Forecast += "Pressure: " + weather.list[1].pressure + "<br>";
+        //         $("#box2").append(day2Forecast);
+        // };
+
+        // function forecastDay3(weather){
+        //     var day3Forecast = "";
+        //         day3Forecast += weather.list[2].temp.max + "/" + weather.list[2].temp.min + "<br>";
+        //         day3Forecast += "Rain: " + weather.list[2].weather[0].description + "<br>";
+        //         day3Forecast += "Humidity: " + weather.list[2].humidity + "<br>";
+        //         day3Forecast += "Wind: " + weather.list[2].speed + "<br>";
+        //         day3Forecast += "Pressure: " + weather.list[2].pressure + "<br>";
+        //         $("#box3").append(day3Forecast);
+        // };
+        function addForecasts(data){
+            var htmlString = "";
+             data.list.forEach(function(forecast, index){
+                htmlString = "";
+                htmlString += forecast.temp.max + "/" + forecast.temp.min + "<br>"; 
+                htmlString += "Rain: " + forecast.weather[0].description + "<br>";
+                htmlString += "Humidity: " + forecast.humidity + "<br>";
+                htmlString += "Wind: " + forecast.speed + "<br>";
+                htmlString += "Pressure: " + forecast.pressure + "<br>";
+                $('#box' + (index + 1)).append(htmlString);
+            });   
+                
         };
-
-
-        function forecastDay2(weather){
-            var day2Forecast = "";
-                day2Forecast += weather.list[1].temp.max + "/" + weather.list[1].temp.min + "<br>";
-                day2Forecast += "Rain: " + weather.list[1].weather[0].description + "<br>";
-                day2Forecast += "Humidity: " + weather.list[1].humidity + "<br>";
-                day2Forecast += "Wind: " + weather.list[1].speed + "<br>";
-                day2Forecast += "Pressure: " + weather.list[1].pressure + "<br>";
-                $("#box2").append(day2Forecast);
-        };
-
-        function forecastDay3(weather){
-            var day3Forecast = "";
-                day3Forecast += weather.list[2].temp.max + "/" + weather.list[2].temp.min + "<br>";
-                day3Forecast += "Rain: " + weather.list[2].weather[0].description + "<br>";
-                day3Forecast += "Humidity: " + weather.list[2].humidity + "<br>";
-                day3Forecast += "Wind: " + weather.list[2].speed + "<br>";
-                day3Forecast += "Pressure: " + weather.list[2].pressure + "<br>";
-                $("#box3").append(day3Forecast);
-        };
-
-        data.forEach(function(day, index){
-            $('#day' + (index + 1)).append.Math.round(day, list)
-        })
+        
 
         
 })();  
