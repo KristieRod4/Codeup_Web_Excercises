@@ -6,13 +6,22 @@ body {
 
 .days{
 	background-color: #fff;
-	display: flex;
+	/*display: flex;
 	height: 150px;
-	width: 200px;
+	width: 200px;*/
 	border: 2px solid black;
+	text-align: center;
 }
 
-#box1{
+#map{
+	width: 900px;
+	height: 700px;
+	margin: auto;
+	
+}
+
+
+/*#box1{
 	float: left;
 }
 
@@ -22,4 +31,4 @@ body {
 
 .center{
 	font: center;
-}
+}*/

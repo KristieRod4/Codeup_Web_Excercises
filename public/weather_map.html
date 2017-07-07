@@ -4,107 +4,117 @@
     <title>Weather Map</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/weather.css">
+    <link rel="stylesheet" href="css/google-maps-api.css">
+     
 
+       
+
+         
     <style>
     </style>
 
-    <h1 class="center">Weather Application</h1>
+    
 
-    <h3 class="center">San Antonio</h3>
+    
 </head>
 <body>
+
+    <h1 class="center">Weather Application</h1>
+
+ <main>
+
+<!-- //========================Container for Weather Map Data================//  -->
+
+        <div class="container">
+        
+            <div  id="box"></div>     
+            
+        </div>
+
+<!-- //========================Button for Lat/Lon============================// -->
+        <br>
+        <input  type="text" id="boxLat" placeholder="Latitude"/>
+        <br>
+        <input  type="text" id="boxLon" placeholder="Longitude"/>
+        <br>
+        <button id="submit">Submit</button>
+        <br>
+        <br>
+
+<!-- //=========================Map Div======================================// -->
+
+        <div id = "map"></div>
+
+
+
+<!-- //========================JS Scripting=================================// -->
+    </main>
+
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK-Js6EZbodcZ9mHngfzFU_nXILxg18Kw">
+    </script>
+         <script src="/js/weather_map_api.js"></script> 
+</body>
+
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
- <main >
-        
-        <div class="container">
-            <div class="row">
-
-            <div  class="col-md-4 days" id="box1"></div>
-            <div  class="col-md-4 days" id="box2"></div>
-            <div  class="col-md-4 days" id="box3"></div>
-            
-                
-            </div>
-        </div>
-    </main>
-
-
-
+<!-- /=======================Ajax Request==================================// -->
 
 <script>
 (function() {
     "use strict";
 
+                
+                $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+                    APPID: "7f8e3aa0aad113510e0c1eaafd1c17b8",
+                    q:     "San Antonio, TX",
+                    cnt: "3",
+                    units: "Imperial", 
+                        }) .done(function(data){
+                        addForecasts(data);
+                    }).fail(function(jqXhr, status, error){
+                        alert("There was an error! Check the console for details");
+                        console.log("Response status: " + status);
+                        console.log("Error object: " + error);
+                 });
 
-    $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
-        APPID: "7f8e3aa0aad113510e0c1eaafd1c17b8",
-        q:     "San Antonio, TX",
-        cnt: "3",
-        units: "Imperial", 
-            }) .done(function(data){
-            addForecasts(data);
-        }).fail(function(jqXhr, status, error){
-            alert("There was an error! Check the console for details");
-            console.log("Response status: " + status);
-            console.log("Error object: " + error);
-     });
+        
 
-        // function forecastDay1(weather){
-        //     var day1Forecast = "";
-
-        //     day1Forecast += weather.list[0].temp.max + "/" + weather.list[0].temp.min + "<br>";
-        //     day1Forecast += "Rain: " + weather.list[0].weather[0].description + "<br>";
-        //     day1Forecast += "Humidity: " + weather.list[0].humidity + "<br>";
-        //     day1Forecast += "Wind: " + weather.list[0].speed + "<br>";
-        //     day1Forecast += "Pressure: " + weather.list[0].pressure + "<br>";
-        //     $("#box1").append(day1Forecast);
-
-        // };
-
-
-        // function forecastDay2(weather){
-        //     var day2Forecast = "";
-        //         day2Forecast += weather.list[1].temp.max + "/" + weather.list[1].temp.min + "<br>";
-        //         day2Forecast += "Rain: " + weather.list[1].weather[0].description + "<br>";
-        //         day2Forecast += "Humidity: " + weather.list[1].humidity + "<br>";
-        //         day2Forecast += "Wind: " + weather.list[1].speed + "<br>";
-        //         day2Forecast += "Pressure: " + weather.list[1].pressure + "<br>";
-        //         $("#box2").append(day2Forecast);
-        // };
-
-        // function forecastDay3(weather){
-        //     var day3Forecast = "";
-        //         day3Forecast += weather.list[2].temp.max + "/" + weather.list[2].temp.min + "<br>";
-        //         day3Forecast += "Rain: " + weather.list[2].weather[0].description + "<br>";
-        //         day3Forecast += "Humidity: " + weather.list[2].humidity + "<br>";
-        //         day3Forecast += "Wind: " + weather.list[2].speed + "<br>";
-        //         day3Forecast += "Pressure: " + weather.list[2].pressure + "<br>";
-        //         $("#box3").append(day3Forecast);
-        // };
+//==================================Forecast Function==================================//
         function addForecasts(data){
             var htmlString = "";
+                htmlString += "<h1>" + data.city.name + "</h1>";
+                htmlString += "<div class='row'>";
              data.list.forEach(function(forecast, index){
-                htmlString = "";
-                htmlString += forecast.temp.max + "/" + forecast.temp.min + "<br>"; 
+                var date = new Date(forecast.dt * 1000);
+                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                var dayOfTheWeek = days[date.getDay()];
+                htmlString += "<div class='col-md-4 days'>"; /* previously had empty string */
+                htmlString += dayOfTheWeek + "<br>";
+                htmlString += Math.round(forecast.temp.max) + "&deg" + "/" + Math.round(forecast.temp.min)+ "&deg" + "<br>";
+                htmlString += "<img src='http://openweathermap.org/img/w/" + forecast.weather[0].icon + 
+                ".png'><br>"; 
                 htmlString += "Rain: " + forecast.weather[0].description + "<br>";
                 htmlString += "Humidity: " + forecast.humidity + "<br>";
                 htmlString += "Wind: " + forecast.speed + "<br>";
                 htmlString += "Pressure: " + forecast.pressure + "<br>";
-                $('#box' + (index + 1)).append(htmlString);
-            });   
+                htmlString += "</div>"; /* closes column */
+             }); 
+                htmlString += "</div>"; /* closes row div */  
                 
+                $('#box').append(htmlString);
         };
         
+                
+
 
         
 })();  
     
 </script>
 
-</body>
 </html>
 
 
