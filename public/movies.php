@@ -71,8 +71,12 @@ function pageController($allMovies)
     var_dump($_GET);
     
     // If the $_GET request is empty, show every movie
+    if(!isset($_GET)) {
+        $data['movies'] = $allMovies;
+    }
     
     // If $_GET['genre'] holds 'adventure', make $movies hold movies with 'adventure' as a genre.
+    
 
     if(isset($_GET['genre'])) {
         // make a new array called $movies
@@ -90,8 +94,21 @@ function pageController($allMovies)
         }        
 
         $data['movies'] = $movies;
+
+
         
-    } else {
+    } else if(isset($_GET['release'])) {
+        $release = $_GET['release'];
+        $movies = [];
+
+        foreach($allMovies as $movie) {
+            if($movie['release']>=2000) {
+                $movies[] =$movie;
+            }
+        }
+        $data['movies'] = $movies;
+
+    }else {
         // set $data['movies'] to hold all movies (unless another request is made.)
         $data['movies'] = $allMovies;
     }
@@ -116,20 +133,23 @@ extract(pageController($allMovies));
         <section class="form">
             <form>
                 <!-- Add an input to search by "title" -->
+                <input type="text" name="title"/>
                 <!-- Add a form that has an input for "genre" -->
+                <input type="text" name="genre"/>
                 <!-- Add submit button -->
+                <a href= >SUBMIT</a>
             </form>
         </section>
 
         <section class="links">
             <!-- Add a link that will show all movies  -->
-            <a href="">Show all movies</a>
+            <a href="movies.php">Show all movies</a>
 
             <!-- Add a link that will show only movies with a release date after 2000 -->
-            <a href="">All movies released after 2000</a>
+            <a href="movies.php?release=<2000">All movies released after 2000</a>
 
             <!-- Add a link that shows all movies w/ the comedy genre -->
-            <a href="">Show only comedies</a>
+            <a href="movies.php?genre=comedy">Show only comedies</a>
 
             <!-- Add a link that shows all movies w/ the sci-fi genre -->
             <a href="movies.php?genre=sci-fi">Show all Sci-Fi movies</a>
