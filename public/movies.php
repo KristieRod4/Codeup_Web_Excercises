@@ -65,58 +65,109 @@ $allMovies = [
     ]
 ];
 
+require_once 'functions.php';
+
+function getMoviesByGenre($genre, $allMovies)
+{
+$movies = [];
+}
+
+function getMoviesByTitle()
+{
+
+}
 function pageController($allMovies)
 {
     $data = [];
     var_dump($_GET);
+
+    $genre = inputGet('genre');
+    $title = inputGet('title');
     
     // If the $_GET request is empty, show every movie
-    if(!isset($_GET)) {
-        $data['movies'] = $allMovies;
-    }
-    
-    // If $_GET['genre'] holds 'adventure', make $movies hold movies with 'adventure' as a genre.
-    
-
-    if(isset($_GET['genre'])) {
-        // make a new array called $movies
-        // iterate through the allMovies array
-        // if any movie has the genre of sci-fi, push that array onto $movies;
-
-        $genre = $_GET['genre'];
+    if(empty($_GET)) {
+        $data['movies'] = allMovies();
+    } else if(!empty($genre) && empty($title == "") {
         $movies = [];
-    
-        foreach($allMovies as $movie) {
-            if(in_array($genre, $movie['genre'])) {
 
+        foreach($allMovies as $movie){
+            if(in_array($genre, $movies['genre'])) {
+                //array_push $movie onto the array $movies
                 $movies[] = $movie;
             }
-        }        
+        }
 
         $data['movies'] = $movies;
 
-
-        
-    } else if(isset($_GET['release'])) {
-        $release = $_GET['release'];
+        //get all movies with that genre
+        //push tem onto an array called movies
+        //set $data['movies'] to hold $movies
+    }else if(!empty($title) && empty($genre)) {
         $movies = [];
 
-        foreach($allMovies as $movie) {
-            if($movie['release']>=2000) {
-                $movies[] =$movie;
+        foreach ($allMovies as $movie) {
+            if(stripos($movie['title'], $title) !== false) {
+                $movies[] = $movie;
+
             }
         }
         $data['movies'] = $movies;
+        //find movies by title
+        //push movies w/ that title onto an array called $movies
+        //set $data['movies'] to hold movies...
+    }else if(!empty($title) && !empty($genre)){
+        //find movies w/ both that title and that genre
 
-    }else {
-        // set $data['movies'] to hold all movies (unless another request is made.)
-        $data['movies'] = $allMovies;
     }
+    
+    
+    // IF the genre has something and title is empty, search genre
+    //If the title has something and the genre is empty, search by title
+    //If bothtite and genre have something, show movies with that title with that genre
 
-    return $data;
+    return data;
 }
-
 extract(pageController($allMovies));
+
+    // if(isset($_GET['genre'])) {
+    //     // make a new array called $movies
+    //     // iterate through the allMovies array
+    //     // if any movie has the genre of sci-fi, push that array onto $movies;
+
+    //     $genre = $_GET['genre'];
+    //     $movies = [];
+    
+    //     foreach($allMovies as $movie) {
+    //         if(in_array($genre, $movie['genre'])) {
+
+    //             $movies[] = $movie;
+    //         }
+    //     }        
+
+    //     $data['movies'] = $movies;
+
+
+        
+    // } else if(isset($_GET['release'])) {
+    //     $release = $_GET['release'];
+    //     $movies = [];
+
+    //     foreach($allMovies as $movie) {
+    //         if($movie['release']>=2000) {
+    //             $movies[] =$movie;
+    //         }
+    //     }
+    //     $data['movies'] = $movies;
+
+    // }else {
+    //     // set $data['movies'] to hold all movies (unless another request is made.)
+    //     $data['movies'] = $allMovies;
+//     // }
+
+//     return $data;
+// }
+
+// extract(pageController($allMovies));
 
 ?>
 <!DOCTYPE html>
@@ -133,11 +184,14 @@ extract(pageController($allMovies));
         <section class="form">
             <form>
                 <!-- Add an input to search by "title" -->
-                <input type="text" name="title"/>
-                <!-- Add a form that has an input for "genre" -->
-                <input type="text" name="genre"/>
+                <label for="title">Title</label>"
+                <input type="text" name="title" id="title" placeholder="Search by movie title">
+               <!-- Add a form that has an input for "genre"  -->
+                <lable for="genre">Genre</label>
+                <input type="text" name="genre" id="genre" placeholder="Search by genre">
                 <!-- Add submit button -->
-                <a href= >SUBMIT</a>
+                <button type="submit">Search now!</button>
+                <!-- <a href= >SUBMIT</a> -->
             </form>
         </section>
 
@@ -146,7 +200,7 @@ extract(pageController($allMovies));
             <a href="movies.php">Show all movies</a>
 
             <!-- Add a link that will show only movies with a release date after 2000 -->
-            <a href="movies.php?release=<2000">All movies released after 2000</a>
+            <a href="movies.php?release=2000">All movies released after 2000</a>
 
             <!-- Add a link that shows all movies w/ the comedy genre -->
             <a href="movies.php?genre=comedy">Show only comedies</a>

@@ -5,13 +5,17 @@
 //This function will need to access the $_GET superglobal variable and check the values stored to it.
 //It will also need to increment the counter when the "hit" link was clicked, and reset the counter in the event of a "miss".
 //Use extract() function to change the return value of the pageController() into variables for your HTML.
+
+require_once '../Input.php';
+
 function pageController() {
 	$count = [];
-	$count['count'] = (isset($_GET['count'])) ? $_GET['count'] : 0;
+	$count['count'] = Input::has('count') ? Input::get('count') : 0;
 	return $count;
 }
 
 extract(pageController());
+
 
 ?>
 

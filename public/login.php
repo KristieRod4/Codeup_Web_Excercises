@@ -8,6 +8,8 @@ session_start();
 
 var_dump($_SESSION);
 
+require 'functions.php';
+
 function pageController()
 {
 	$data = [];
@@ -19,8 +21,8 @@ function pageController()
 	}
 	
 	$message = "";
-	$username = (isset($_POST['username'])) ? $_POST['username'] : "";
-	$password = (isset($_POST['password'])) ? $_POST['password'] : "";
+	$username = inputHas('username') ? escape(inputGet('username')) : "";
+	$password = inputHas('password') ? escape(inputGet('password')) : "";
 
 	//event listener that user submitted the form
 	if(!empty($_POST)) {
