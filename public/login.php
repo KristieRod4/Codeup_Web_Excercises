@@ -9,6 +9,8 @@ session_start();
 var_dump($_SESSION);
 
 require 'functions.php';
+require_once "../Auth.php"
+require_once "../Input.php"
 
 function pageController()
 {

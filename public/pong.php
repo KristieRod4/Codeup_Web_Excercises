@@ -7,6 +7,7 @@
 //Use extract() function to change the return value of the pageController() into variables for your HTML.
 
 require_once '../Input.php';
+require_once 'functions.php';
 
 function pageController() {
 	$count = [];
@@ -29,10 +30,10 @@ extract(pageController());
 </head>
 <body>
 	
-		<h1>Counter: <?= $count; ?></h1>
+		<h1>Counter: <?= escape($count); ?></h1>
 
 
-		<a href="/ping.php?count=<?= $count +1; ?>">HIT</a>
+		<a href="/ping.php?count=<?= escape($count) +1; ?>">HIT</a>
 		<a href="/ping.php?count=0">MISS</a>
 
 </body>
