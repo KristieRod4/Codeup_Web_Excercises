@@ -20,7 +20,7 @@ class Input
      * @param mixed $default default value to return if key not found
      * @return mixed value passed in request
      */
-    public static function get($key, $default = null)
+    public static function get($key, $default = 0)
     {
             if(self::has($key)) {
                 return $_REQUEST[$key];
