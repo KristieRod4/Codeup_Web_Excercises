@@ -1,12 +1,9 @@
 <?php
+require_once "parks_logins.php";
 
 
-$username = "vagrant";
-$password = "vagrant";
-$dbNAME = "codeup_test_db";
+$connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
 
-$dbc = new PDO("mysql:host=127.0.0.1;dbname=$dbname=$dbNAME", $username, $password);
+$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-echo $dbc->getAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) . "\n";
+// echo $connection->getAttribute(PDO::ATTR_CONNECTION_STATUS) . "\n";
