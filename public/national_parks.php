@@ -1,23 +1,47 @@
 <?php
+require __DIR__ . '/../Park.php';
 require_once __DIR__ . '/../db_connect.php';
 require_once __DIR__ . '/../parks_logins.php';
 require_once __DIR__ . '/../Input.php';
 
-function getCount($connection)
+
+function getPageCount($connection)
 {
-	$countRequest = "SELECT COUNT(*) FROM parks";
+	$countRequest = "SELECT COUNT(*) FROM national_parks";
 	$stmt =$connection->query($countRequest);
 	$count = (int) $stmt->fetchColumn();
 
 	return $count;
 }
 
-function returnAllParks($connection, $limit = 2, $offset = 0)
+function showAllParks($connection, $limit = 2, $offset = 0)
 {
-	$selectParks = "SELECT * FROM parks LIMIT $limit OFFSET $offset";
+	$selectParks = "SELECT * FROM national_parks LIMIT $limit OFFSET $offset";
 	$stmt = $connection->query($selectParks);
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	return $rows;
+}
+
+function addPark($connection)
+{
+	
+
+	$stmt->bindValue('park_name', $_POST['park_name'], PDO::PARAM_STR);
+	$insert = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) 
+  VALUES(:name, :location, :date_established, :area_in_acres, :description)";
+
+  $statement = $connection->prepare($insert);
+
+  $statement-> bindValue(':name', $_POST$park[0], PDO::PARAM_STR);
+
+  $statement-> bindValue(':location', $park[1], PDO::PARAM_STR);
+  $statement-> bindValue(':date_established', $park[2], PDO::PARAM_STR);
+  $statement-> bindValue(':area_in_acres', $park[3], PDO::PARAM_STR);
+  $statement-> bindValue(':description', $park[4], PDO::PARAM_STR);
+
+  $statement->execute();   
+
+	$stmt execute();
 }
 
 function pageController($connection) 
@@ -26,11 +50,8 @@ function pageController($connection)
 
 
  		$page = Input::escape(Input::get('page', 1));
-
-		$limitPerPage = Input::escape(INPUT::get('limit PerPage', 4));
-
- 
-		$query = returnAllParks($connection, $limitPerPage, (($page -1) * $limitPerPage));
+		$limitPerPage = Input::escape(INPUT::get('limitPerPage', 4));
+		$parks = showAllParks($connection, $limitPerPage, (($page -1) * $limitPerPage));
 
 
 		$data['page'] = $page;
@@ -39,7 +60,7 @@ function pageController($connection)
 
 		$data['limitPerPage'] = $limitPerPage;
 
-		$data[] = 
+		$data['pageCount'] = getPageCount($connection);
 
 		
 
@@ -74,12 +95,24 @@ function pageController($connection)
  	<main class="container">
 	 	<h1 class='main'>NATIONAL PARKS</h1>
 
-	 		<section class="container col-md-5">
- 				<form method="GET" action="national_parks.php">
- 					<label for="search">Search By Park Name</label>
- 					<input type="text" name="search" input="search" placeholder="please input park name here" 
- 						autofocus>
- 					<button type="submit">Search</button>
+	 		<section class="container col-md-7">
+ 				<form method="GET" action="$page">
+ 					<label for="enter">Enter New Park Details Below</label>
+ 					<br>
+ 					<input type="text" name="name" input="name" 
+ 						placeholder="please enter name" autofocus>
+ 					<input type="text" name="location" input="location" 
+ 						placeholder="please enter location"autofocus>
+ 					<br>
+ 					<input type="date" name="date_established" input="date_established" 
+ 						placeholder="please enter date" autofocus>
+ 					<input type="text" name="area_in_acres" input="area_in_acres" 
+ 						placeholder="please enter area" autofocus>
+ 					<br>
+ 					<textarea type="text" name="description" input="description" 
+ 						placeholder="please enter description"></textarea>
+ 					<br>
+ 					<button type="submit">Add Park</button>
  				</form>
  			</section>
 
@@ -96,14 +129,15 @@ function pageController($connection)
 	    
 
 		    </section>
-		    <section class="container col-md-5"> 
+		    <section class="container col-md-6"> 
 		    	<?php if ($page > 1) : ?>
-					<a class="btn btn-default" href="/national_parks.php?page=<?= $page -1?>&limitPerPage=<?=$limitPerPage?>">PREV</a>
- 					<a class="btn btn-default" href="/national_parks.php?page=<?= $page + 1?>&limitPerPage=<?=$limitPerPage?>">NEXT</a>
+					<a class="btn btn-default" href="?page=<?= $page -1?>&limitPerPage=<?=$limitPerPage?>">PREV</a>
+ 					<a class="btn btn-default" href="?page=<?= $page + 1?>&limitPerPage=<?=$limitPerPage?>">NEXT</a>
 
  					<a href="?page=<?=$page?>&limitPerPage=4" class="btn btn-info">4 parks per page</a>
  					<a href="?page=<?=$page?>&limitPerPage=12" class="btn btn-info">12 parks per page</a>
  					<a href="?page=<?=$page?>&limitPerPage=50" class="btn btn-info">50 parks per page</a>
+ 				<?php endif; ?>
  			</section> 
 
 
