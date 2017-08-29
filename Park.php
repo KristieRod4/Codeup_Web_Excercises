@@ -1,5 +1,6 @@
 <?php
 require "parks_logins.php";
+require "Model.php";
 
 /**
  * A Class for interacting with the national_parks database table
@@ -30,7 +31,7 @@ require "parks_logins.php";
  *      $park->insert();
  *
  */
-class Park
+class Park extends Model
 {
 
     ///////////////////////////////////
@@ -42,17 +43,20 @@ class Park
      */
     public static $connection = null;
 
-    /**
-     * establish a database connection if we do not have one
-     */
-    public static function dbConnect() {
-        require "db_connect.php";
+    public static $table = 'national_parks';
+
+    // *
+    //  * establish a database connection if we do not have one
+    //  makes a connct with the database and sets a property ie..$connection
+        //moved to Model
+    // public static function dbConnect() {
+    //     require "db_connect.php";
         
-        if (! is_null(self::$connection)) {
-            return;
-        }
-        self::$connection = $connection;
-    }
+    //     if (! is_null(self::$connection)) {
+    //         return;
+    //     }
+    //     self::$connection = $connection;
+    // }
 
     /**
      * returns the number of records in the database
@@ -63,7 +67,7 @@ class Park
         // TODO: use the $dbc static property to query the database for the
         //       number of existing park records
         $countRequest = "SELECT COUNT(*) FROM national_parks";
-        $stmt =$connection->query($countRequest);
+        $stmt =self::$connection->query($countRequest);
         $count = (int) $stmt->fetchColumn();
 
     return $count;
@@ -79,19 +83,26 @@ class Park
         // TODO: use the $dbc static property to query the database for all the
         //       records in the parks table
             $select = "SELECT * FROM national_parks";
+            //use the query method since there is nothing to pass or bind...we just 
+            //want all of the contect of our table.
             $stmt = self::$connection->query($select);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             // $parks = Park::all();
+        // TODO: iterate over the results array and transform each associative
+        //       array into a Park object
+            
+        // TODO: return an array of Park objects
+    
                 $parks = [];
 
-               foreach($results as $result) {
+                foreach($results as $result) {
                     $park = new Park();
                     $park->id = $result['id'];
                     $park->name = $result['name']; 
                     $park->location = $result['location'];
-                    $park->date_established = $result['date_established'];
-                    $park->area_in_acres = $result['area_in_acres'];
+                    $park->dateEstablished = $result['date_established'];
+                    $park->areaInAcres = $result['area_in_acres'];
                     $park->description = $result['description'];
 
                     $parks[] = $park;
@@ -99,11 +110,6 @@ class Park
 
             return $parks; 
         }
-        // TODO: iterate over the results array and transform each associative
-        //       array into a Park object
-            
-        // TODO: return an array of Park objects
-    
 
     /**
      * returns $resultsPerPage number of results for the given page number
@@ -114,22 +120,35 @@ class Park
          self::dbConnect();
         // TODO: calculate the limit and offset needed based on the passed
         //       values
-         $offset = ($pageNo -1) * $resultsPerPage;
+         $limit = $resultsPerPage;
+         $offset = ($pageNo * $resultsPerPage) - $resultsPerPage;
 
         // TODO: use the $dbc static property to query the database with the
         //       calculated limit and offset
-         $selectParks = "SELECT * FROM national_parks LIMIT :resultsPerPage OFFSET :offset";
+         $selectParks = "SELECT * FROM national_parks ORDER BY name LIMIT :limit OFFSET :offset";
          $stmt = self::$connection->prepare($selectParks);
 
-            $stmt->bindValue(':resultsPerPage', $resultsPerPage, PDO::PARAM_INT);
-            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
 
             $stmt->execute();
             
+            $results = $stmt->fetchAll(PDO::FETCH_OBJ);
             
+            $output = [];
 
-         $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
-         return $rows;
+            foreach($results as $result) {
+                $park = new Park();
+                $park->id = $result['id'];
+                $park->name = $result['name'];
+                $park->location = $result['location'];
+                $park->dateEstablished = $result['date_established'];
+                $park->areaInAcres = $result['area_in_acres'];
+
+                $output[] =$park
+            }
+            return $rows;
+
         // TODO: return an array of the found Park objects
     }
 
@@ -140,17 +159,21 @@ class Park
     /**
      * properties that represent columns from the database
      */
-    public $id;
-    public $name;
-    public $location;
-    public $dateEstablished;
-    public $areaInAcres;
-    public $description;
+    //there are camel case because they are the public properties and not the
+    //colum names in the actual table.
+    // public $id;
+    // public $name;
+    // public $location;
+    // public $dateEstablished;
+    // public $areaInAcres;
+    // public $description;
 
     /**
      * inserts a record into the database
      */
-    public function insert() {
+     // It also contains non static properties..
+     //insert method is not static because it contingent on individual park.  
+    protected function insert() {
         // TODO: call dbConnect to ensure we have a database connection
 
         self::dbConnect();
@@ -164,6 +187,8 @@ class Park
 
         // TODO: use the $this keyword to bind the values from this object to
         //       the prepared statement
+        // the bindValues assumes that the values i put here are what i actually want
+        //in my database.
        
         $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
         $stmt->bindValue(':location', $this->location, PDO::PARAM_STR);
@@ -174,9 +199,48 @@ class Park
         // TODO: excute the statement and set the $id property of this object to
         //       the newly created id
         $stmt->execute();
+
         $this->id = self::$connection->lastInsertId();   
         
     }
+
+    /*$park->update(): update an existing record in the database with new values*/
+        protected function update() {
+                self::dbConnect();
+                $update = "UPDATE " . static::$table . " SET
+                
+                name = :name,
+                location = :location', $this->location, PDO::PARAM_STR);
+                date = :date_established', $this->dateEstablished, PDO::PARAM_STR);
+                area_in_acres = :area_in_acres', $this->areaInAcres, PDO::PARAM_STR);    
+                description = :description', $this->description, PDO::PARAM_STR);    
+                WHERE id = :id";
+
+                $stmt = self::$connection->prepare($update);
+                $stmt->binValue(":name", $this->name, PDO::PARAM_STR);
+                $stmt->binValue(":location", $this->location, PDO::PARAM_STR);
+                $stmt->binValue(":date_established", $this->date_establish, PDO::PARAM_STR);
+                $stmt->binValue(":area_in_acres", $this->area_in_acres, PDO::PARAM_STR);
+                $stmt->binValue(":description", $this->description, PDO::PARAM_STR);
+                $stmt->binValue(":id", $this->id, PDO::PARAM_INT);
+
+                $stmt->execute(); 
+        }
+
+        public function find($id) {
+
+            self::dbConnect();
+            $query = "SELECT * from " . static::$table . "where id = :id"
+            $stmt = self::$connection->prepare($query);
+
+            $stmt = bindValue('id', $id, PDO::PARAM_INT)
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::Fetch_ASSOC);
+            $park = new Park($result);
+            return($park);
+            
+        }
 
         
 

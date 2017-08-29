@@ -1,35 +1,77 @@
 <?php
-
 require_once "Park.php";
 
-// $parks = Park::all();
 
-// var_dump($parks);
+// test dbConnect() and Park::$connection
+
+// 	Park::dbConnect();
+// 	var_dump(Park::$connection);
+
+
+// // test Park::count()
+	
+// 	echo "There are " . Park::count() . " parks in the parks table.";
+
+
+// test Park::all()
+
+	// var_dump(Park::all());
+
+	// $allParks = Park::all();
+
+	// echo "Park 1 details..." . PHP_EOL;
+
+	// echo $allParks[0]->name . PHP_EOL;
+	// echo $allParks[0]->location . PHP_EOL;
+	// echo $allParks[0]->dateEstablished . PHP_EOL;
+	// echo $allParks[0]->areaInAcres . PHP_EOL;
+	// echo $allParks[0]->description . PHP_EOL;
+
+
+
+// test Park::paginate()
+
+	// print_r(Park::paginate(1));
+	// print_r(Park::paginate(2));
+	// print_r(Park::paginate(2, 2));
+	// print_r(Park::paginate(1, 8));
+
+
+
+// test inserting a new park
 
 // $park = new Park();
-// $park->name = "Awesome Park";
-// $park->location = "here";
-// $park->date_established = "1950";
-// $park->area_in_acres = 800;
-// $park->description = "Most totally awesome and amaing park ever";
+
+// $park->name = "Frio River Park";
+// $park->location = "Texas";
+// $park->area_in_acres = 700;
+// $park->date_established = '1913-02-02';
+// $park->description = 'Yadda yadda';
 // $park->insert();
 
 
-// $parks = Park::paginate(1, 4);
+/////adding test for park extends model
 
-// var_dump($parks);
+$parkArray = [
+'name'-> 'Glacier National Parl',
+'location'-> 'Montana',
+'areaInAcres'-> '313131.4'
+'dateEstablished'-> '1912-01-01'
+'decription'-> 'Ask Justin for pix'
 
-// $parks = Park::insert();
+]
 
-// var_dump($parks);
+$park = new Park($parksArray);
 
-$park = new Park();
-     $park->name = 'KPR National Park';
-     $park->location = 'Amazon';
-     $park->dateEstablished = '1972-12-26';
-     $park->areaInAcres = 555555.91;
-     $park->description = 'UREKA it passed the test!!';
-     $park->insert();
+$park-> save();
+
+$anotherPark = Park::find(2);
+$anotherPark->description = "Really awesome park is awesome and parky";
+$anotherPark->save();
+
+
+$park = Park::find(3);
+$park->delete();
 
 
 

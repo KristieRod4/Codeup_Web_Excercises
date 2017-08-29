@@ -5,31 +5,36 @@ require_once __DIR__ . '/../parks_logins.php';
 require_once __DIR__ . '/../Input.php';
 
 
-function getPageCount($connection)
-{
-	$countRequest = "SELECT COUNT(*) FROM national_parks";
-	$stmt =$connection->query($countRequest);
-	$count = (int) $stmt->fetchColumn();
+// function getPageCount($connection)
+// {
+// 	$countRequest = "SELECT COUNT(*) FROM national_parks";
+// 	$stmt =$connection->query($countRequest);
+// 	$count = (int) $stmt->fetchColumn();
 
-	return $count;
-}
+// 	return $count;
+// }
 
-function showAllParks($connection, $limit = 2, $offset = 0)
-{
-	$selectParks = "SELECT * FROM national_parks LIMIT $limit OFFSET $offset";
-	$stmt = $connection->query($selectParks);
-	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	return $rows;
-}
+// function showAllParks($connection, $limit = 2, $offset = 0)
+// {
+// 	$selectParks = "SELECT * FROM national_parks LIMIT $limit OFFSET $offset";
+// 	$stmt = $connection->query($selectParks);
+// 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 	return $rows;
+// }
 
 function addPark($connection)
 {
 	
+	$name = Input::get('name');
+	$location = Input::get('location');
+	$date_established = Input::get('date_established');
+	$area_in_acres = Input::get('area_in_acres');
+	$description = Input::get('description');
 
-	$stmt->bindValue('park_name', $_POST['park_name'], PDO::PARAM_STR);
-	$insert = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) 
-  VALUES(:name, :location, :date_established, :area_in_acres, :description)";
 
+
+	$date_established
+	
   $statement = $connection->prepare($insert);
 
   $statement-> bindValue(':name', $_POST$park[0], PDO::PARAM_STR);
@@ -50,21 +55,36 @@ function pageController($connection)
 
 
  		$page = Input::escape(Input::get('page', 1));
-		$limitPerPage = Input::escape(INPUT::get('limitPerPage', 4));
-		$parks = showAllParks($connection, $limitPerPage, (($page -1) * $limitPerPage));
 
+		$limitPerPage = Input::escape(INPUT::get('limitPerPage', 'resultsPerPage'));
 
+		$parks = Park::paginate($page, $recordsPerPage);
 		$data['page'] = $page;
 
 		$data['parks'] = $parks;
 
-		$data['limitPerPage'] = $limitPerPage;
+		$data['recordsPerPage'] = $recordsPerPage;
 
-		$data['pageCount'] = getPageCount($connection);
+		$data['pageCount'] = Park::count();
+
+		return $data;
+
+
+		// if (!empty($_POST)) {
+		// 	$park = new Park();
+
+		// 		$park->name = Input::get('name');
+		// 		$park->location = Input::get('location');
+		// 		$park->dateEstablished = Input::get('date_established');
+		// 		$park->areaInAcres = Input::get('area_in_acres');
+		// 		$park->description = Input::get('description');
+		// 		$park->insert();
+
+		// 		Park::insert();
+		}
 
 		
 
-	return $data;
 	
 	
 }
@@ -119,11 +139,12 @@ function pageController($connection)
 			<section class="container col-md-8">
 				<?php foreach($parks as $park):?>
 					<div class="col-md-4">
-						<h3><?=$park['name']?></h3>
-							<p><strong>Location: </strong> <?=$park['location'] ?></p>
-							<p><strong>Date Established: </strong> <?=$park['date_established'] ?></p>
-							<p><strong>Area in acres: </strong> <?=$park['area_in_acres'] ?></p>
-							<p><strong>Description: </strong> <?=$park['description'] ?></p>
+						<h3><?=Input::escape$park->name?></h3>
+							<!-- here we are echoing properties on the object -->
+							<p><strong>Location: </strong> <?=Input::escape$park->location ?></p>
+							<p><strong>Date Established: </strong> <?=Input::escape$park->date_established ?></p>
+							<p><strong>Area in acres: </strong> <?=Input::escape$park->area_in_acres ?></p>
+							<p><strong>Description: </strong> <?=Input::escape$park->description ?></p>
 					</div>
 			<?php endforeach; ?>
 	    
@@ -131,12 +152,12 @@ function pageController($connection)
 		    </section>
 		    <section class="container col-md-6"> 
 		    	<?php if ($page > 1) : ?>
-					<a class="btn btn-default" href="?page=<?= $page -1?>&limitPerPage=<?=$limitPerPage?>">PREV</a>
- 					<a class="btn btn-default" href="?page=<?= $page + 1?>&limitPerPage=<?=$limitPerPage?>">NEXT</a>
+					<a class="btn btn-default" href="<?= $page -1?>&limitPerPage=<?=$limitPerPage?>">PREV</a>
+ 					<a class="btn btn-default" href="<?= $page + 1?>&limitPerPage=<?=$limitPerPage?>">NEXT</a>
 
- 					<a href="?page=<?=$page?>&limitPerPage=4" class="btn btn-info">4 parks per page</a>
- 					<a href="?page=<?=$page?>&limitPerPage=12" class="btn btn-info">12 parks per page</a>
- 					<a href="?page=<?=$page?>&limitPerPage=50" class="btn btn-info">50 parks per page</a>
+ 					<a href="<?=$page?>&limitPerPage=4" class="btn btn-info">4 parks per page</a>
+ 					<a href="<?=$page?>&limitPerPage=12" class="btn btn-info">12 parks per page</a>
+ 					<a href="<?=$page?>&limitPerPage=50" class="btn btn-info">50 parks per page</a>
  				<?php endif; ?>
  			</section> 
 
